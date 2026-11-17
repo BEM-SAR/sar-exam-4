@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>B. Long Phonics - Level 1 Final Exam</title>
+  <style>
+    :root {
+      --primary: #b91c1c;
+      --primary-dark: #7f1d1d;
+      --secondary: #1e3a8a;
+      --bg: #f3f4f6;
+      --card: #ffffff;
+      --text: #1f2937;
+      --border: #d1d5db;
+      --success: #15803d;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    input, select, textarea {
+      -webkit-user-select: text;
+      user-select: text;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+      line-height: 1.5;
+    }
+
+    /* Top Header & Timer Bar */
+    header {
+      background: var(--card);
+      border-bottom: 4px solid var(--primary);
+      padding: 12px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .stamp-logo {
+      width: 64px;
+      height: 64px;
+      flex-shrink: 0;
+    }
+
+    .header-titles h1 {
+      margin: 0;
+      font-size: 1.15rem;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .header-titles p {
+      margin: 2px 0 0;
+      font-size: 0.8rem;
+      color: #4b5563;
+      font-weight: 600;
+    }
+
+    .signature-badge {
+      display: inline-block;
+      background: #fee2e2;
+      color: var(--primary-dark);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid #fca5a5;
+      margin-top: 3px;
+    }
+
+    .timer-box {
+      background: #111827;
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 8px;
+      text-align: center;
+      min-width: 105px;
+    }
+
+    .timer-box span {
+      display: block;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      color: #9ca3af;
+    }
+
+    .timer-box strong {
+      font-size: 1.2rem;
+      font-family: monospace;
+      color: #fbbf24;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 850px;
+      margin: 20px auto;
+      padding: 0 14px 60px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 18px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      border: 1px solid var(--border);
+    }
+
+    .part-banner {
+      background: var(--secondary);
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 8px;
+      margin-bottom: 14px;
+    }
+
+    .q-header h2 {
+      margin: 0;
+      font-size: 1.05rem;
+      color: #111827;
+    }
+
+    .score-pill {
+      background: #fef2f2;
+      color: var(--primary);
+      border: 1px solid #fecaca;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+
+    /* Candidate Info Grid */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #374151;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.95rem;
+    }
+
+    /* Question 1 */
+    .q1-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      border-bottom: 1px solid #f3f4f6;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .letter-pair {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 6px;
+      background: #eff6ff;
+      padding: 6px 14px;
+      border-radius: 6px;
+      border: 1px solid #bfdbfe;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    .radio-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #f9fafb;
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .radio-btn input {
+      transform: scale(1.2);
+    }
+
+    /* Question 2 */
+    .seq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+    }
+
+    .seq-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      border-radius: 8px;
+      border: 2px solid #cbd5e1;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      font-size: 1.15rem;
+      letter-spacing: 4px;
+      cursor: pointer;
+    }
+
+    .seq-box:nth-child(1) { background: #e2e8f0; }
+    .seq-box:nth-child(2) { background: #ffedd5; }
+    .seq-box:nth-child(3) { background: #dcfce7; }
+    .seq-box:nth-child(4) { background: #fef9c3; }
+
+    /* Oral & Listening Chips */
+    .chip-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .chip {
+      background: #f3f4f6;
+      border: 1px solid #d1d5db;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .examiner-note {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      padding: 10px 12px;
+      font-size: 0.85rem;
+      color: #92400e;
+      margin-bottom: 10px;
+      border-radius: 4px;
+    }
+
+    /* Question 6 Matching */
+    .match-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+    }
+
+    .match-item {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      text-align: center;
+      background: #fafafa;
+    }
+
+    .match-emoji {
+      font-size: 2.6rem;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .match-item select {
+      width: 100%;
+      padding: 6px;
+      border-radius: 6px;
+      border: 1px solid #9ca3af;
+      font-weight: 600;
+    }
+
+    /* Question 7 Reading */
+    .passages {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .passage-card {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .passage-card h4 {
+      margin: 0 0 6px;
+      color: var(--secondary);
+    }
+
+    /* Question 8 Dictation Grid */
+    .dict-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+      gap: 8px;
+    }
+
+    .dict-cell {
+      text-align: center;
+      background: #f9fafb;
+      padding: 6px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    .dict-cell span {
+      display: block;
+      font-size: 0.75rem;
+      color: #6b7280;
+      font-weight: 700;
+    }
+
+    .dict-cell input {
+      width: 100%;
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: 4px;
+      margin-top: 4px;
+      border: 1px solid #9ca3af;
+      border-radius: 4px;
+    }
+
+    /* Questions 9 & 10 Translation Tables */
+    .trans-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 10px;
+    }
+
+    .trans-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #f9fafb;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .trans-word {
+      font-weight: 700;
+      min-width: 95px;
+    }
+
+    .trans-row input {
+      flex: 1;
+      padding: 6px 8px;
+      border: 1px solid #9ca3af;
+      border-radius: 5px;
+      font-size: 0.95rem;
+    }
+
+    /* Examiner Input Boxes inside questions */
+    .examiner-score-bar {
+      margin-top: 12px;
+      padding: 10px;
+      background: #f1f5f9;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      border: 1px dashed #64748b;
+    }
+
+    .examiner-score-bar input {
+      width: 80px;
+      padding: 6px;
+      font-weight: 700;
+      text-align: center;
+      border: 1px solid #475569;
+      border-radius: 4px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      width: 100%;
+      font-size: 1.1rem;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-whatsapp { background: #16a34a; color: #fff; }
+    .btn-email { background: #2563eb; color: #fff; }
+    .btn-copy { background: #374151; color: #fff; }
+
+    /* Overlays & Result Screen */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(17, 24, 39, 0.95);
+      color: #fff;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-box {
+      background: #fff;
+      color: var(--text);
+      max-width: 520px;
+      width: 100%;
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3);
+    }
+
+    .hidden { display: none !important; }
+
+    table.result-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 0.9rem;
+    }
+
+    table.result-table th, table.result-table td {
+      border: 1px solid #d1d5db;
+      padding: 8px;
+      text-align: left;
+    }
+
+    table.result-table th {
+      background: #f3f4f6;
+    }
+
+    .share-actions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .warning-banner {
+      background: #fef2f2;
+      color: #991b1b;
+      border: 1px solid #f87171;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      margin-bottom: 14px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body oncontextmenu="return false;">
+
+  <!-- START SCREEN OVERLAY -->
+  <div id="startOverlay" class="overlay">
+    <div class="modal-box">
+      <svg class="stamp-logo" viewBox="0 0 200 200" style="width:90px;height:90px;margin:0 auto 10px;">
+        <circle cx="100" cy="100" r="94" fill="none" stroke="#b91c1c" stroke-width="6"/>
+        <circle cx="100" cy="100" r="84" fill="none" stroke="#b91c1c" stroke-width="2.5"/>
+        <circle cx="100" cy="100" r="52" fill="none" stroke="#b91c1c" stroke-width="2.5"/>
+        <defs>
+          <path id="topArcStart" d="M 32,100 A 68,68 0 1,1 168,100" />
+          <path id="botArcStart" d="M 168,105 A 68,68 0 1,1 32,105" />
+        </defs>
+        <text fill="#b91c1c" font-size="22" font-weight="900" letter-spacing="3">
+          <textPath href="#topArcStart" startOffset="50%" text-anchor="middle">B. LONG</textPath>
+        </text>
+        <text fill="#b91c1c" font-size="20" font-weight="900" letter-spacing="2">
+          <textPath href="#botArcStart" startOffset="50%" text-anchor="middle">PHONICS</textPath>
+        </text>
+        <polygon points="34,94 37,101 44,101 38,105 40,112 34,108 28,112 30,105 24,101 31,101" fill="#b91c1c"/>
+        <polygon points="166,94 169,101 176,101 170,105 172,112 166,108 160,112 162,105 156,101 163,101" fill="#b91c1c"/>
+        <path d="M68,80 Q84,74 100,82 Q116,74 132,80 L132,120 Q116,114 100,122 Q84,114 68,120 Z" fill="none" stroke="#b91c1c" stroke-width="3.5"/>
+        <line x1="100" y1="82" x2="100" y2="122" stroke="#b91c1c" stroke-width="3"/>
+        <text x="100" y="109" text-anchor="middle" fill="#b91c1c" font-family="Georgia, serif" font-style="italic" font-weight="bold" font-size="28">P</text>
+      </svg>
+      <h2 style="margin:0 0 6px;color:#b91c1c;">SAR - Sound And Read</h2>
+      <p style="margin:0 0 12px;font-weight:700;">B. LONG PHONICS — FINAL EXAM (Level 1 / A0)</p>
+      <div class="signature-badge" style="margin-bottom:14px;">Signature: BEM -SAR-B.LONG PHONICS</div>
+      <div style="text-align:left;background:#f9fafb;padding:12px;border-radius:8px;font-size:0.85rem;margin-bottom:16px;border:1px solid #e5e7eb;">
+        <strong>Exam Rules:</strong>
+        <ul style="margin:6px 0 0;padding-left:18px;">
+          <li>Time Limit: <strong>75 Minutes</strong>.</li>
+          <li>Total Marks: <strong>165 Marks</strong>.</li>
+          <li><strong>Do NOT refresh</strong> the page or switch to dictionary/translation apps during the exam.</li>
+        </ul>
+      </div>
+      <button class="btn btn-primary" onclick="startExam()">Start Examination</button>
+    </div>
+  </div>
+
+  <!-- HEADER WITH STAMP ICON ON TOP LEFT -->
+  <header>
+    <div class="header-left">
+      <svg class="stamp-logo" viewBox="0 0 200 200" aria-label="B. Long Phonics Stamp">
+        <circle cx="100" cy="100" r="94" fill="none" stroke="#b91c1c" stroke-width="6"/>
+        <circle cx="100" cy="100" r="84" fill="none" stroke="#b91c1c" stroke-width="2.5"/>
+        <circle cx="100" cy="100" r="52" fill="none" stroke="#b91c1c" stroke-width="2.5"/>
+        <defs>
+          <path id="topArc" d="M 32,100 A 68,68 0 1,1 168,100" />
+          <path id="botArc" d="M 168,105 A 68,68 0 1,1 32,105" />
+        </defs>
+        <text fill="#b91c1c" font-size="22" font-weight="900" letter-spacing="3">
+          <textPath href="#topArc" startOffset="50%" text-anchor="middle">B. LONG</textPath>
+        </text>
+        <text fill="#b91c1c" font-size="20" font-weight="900" letter-spacing="2">
+          <textPath href="#botArc" startOffset="50%" text-anchor="middle">PHONICS</textPath>
+        </text>
+        <polygon points="34,94 37,101 44,101 38,105 40,112 34,108 28,112 30,105 24,101 31,101" fill="#b91c1c"/>
+        <polygon points="166,94 169,101 176,101 170,105 172,112 166,108 160,112 162,105 156,101 163,101" fill="#b91c1c"/>
+        <path d="M68,80 Q84,74 100,82 Q116,74 132,80 L132,120 Q116,114 100,122 Q84,114 68,120 Z" fill="none" stroke="#b91c1c" stroke-width="3.5"/>
+        <line x1="100" y1="82" x2="100" y2="122" stroke="#b91c1c" stroke-width="3"/>
+        <text x="100" y="109" text-anchor="middle" fill="#b91c1c" font-family="Georgia, serif" font-style="italic" font-weight="bold" font-size="28">P</text>
+      </svg>
+      <div class="header-titles">
+        <h1>B. Long Phonics — Final Exam</h1>
+        <p>SAR (Sound And Read) • Level: Beginner / A0 • Total: 165 Marks</p>
+        <span class="signature-badge">Signed: BEM -SAR-B.LONG PHONICS</span>
+      </div>
+    </div>
+    <div class="timer-box">
+      <span>Time Left</span>
+      <strong id="timerDisplay">75:00</strong>
+    </div>
+  </header>
+
+  <!-- EXAM FORM -->
+  <main id="examContainer" class="container">
+    <div class="warning-banner" id="securityNotice">
+      🔒 Exam Lock Active: Dictionaries, spellcheck, autocorrect, translation apps, and page refresh are disabled. Focus switches logged: <span id="violationCount">0</span>.
+    </div>
+
+    <!-- CANDIDATE DETAILS -->
+    <section class="card">
+      <div class="info-grid">
+        <div class="field">
+          <label>Participant's Name *</label>
+          <input type="text" id="studentName" placeholder="Enter full name" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" required />
+        </div>
+        <div class="field">
+          <label>School</label>
+          <input type="text" id="schoolName" placeholder="School name" autocomplete="off" autocorrect="off" spellcheck="false" />
+        </div>
+        <div class="field">
+          <label>City / Address</label>
+          <input type="text" id="cityAddress" placeholder="City / Address" autocomplete="off" autocorrect="off" spellcheck="false" />
+        </div>
+        <div class="field">
+          <label>Date</label>
+          <input type="text" id="examDate" value="2026" autocomplete="off" spellcheck="false" />
+        </div>
+      </div>
+    </section>
+
+    <!-- PART 1 -->
+    <div class="part-banner">Part 1: Mastering the Alphabet</div>
+
+    <!-- QUESTION 1 -->
+    <section class="card">
+      <div class="q-header">
+        <h2>QUESTION 1 – How many letters are between: (Select the correct number)</h2>
+        <span class="score-pill">8 Marks</span>
+      </div>
+      <p style="font-size:0.85rem;color:#4b5563;margin-top:0;">Example: <strong>a — d</strong> → <strong>2</strong> (b, c)</p>
+
+      <div class="q1-row">
+        <div class="letter-pair">1. c — g</div>
+        <div class="radio-group">
+          <label class="radio-btn"><input type="radio" name="q1_1" value="1"> 1</label>
+          <label class="radio-btn"><input type="radio" name="q1_1" value="2"> 2</label>
+          <label class="radio-btn"><input type="radio" name="q1_1" value="3"> 3</label>
+        </div>
+      </div>
+
+      <div class="q1-row">
+        <div class="letter-pair">2. l — n</div>
+        <div class="radio-group">
+          <label class="radio-btn"><input type="radio" name="q1_2" value="1"> 1</label>
+          <label class="radio-btn"><input type="radio" name="q1_2" value="2"> 2</label>
+          <label class="radio-btn"><input type="radio" name="q1_2" value="3"> 3</label>
+        </div>
+      </div>
+
+      <div class="q1-row">
+        <div class="letter-pair">3. k — q</div>
+        <div class="radio-group">
+          <label class="radio-btn"><input type="radio" name="q1_3" value="3"> 3</label>
+          <label class="radio-btn"><input type="radio" name="q1_3" value="5"> 5</label>
+          <label class="radio-btn"><input type="radio" name="q1_3" value="1"> 1</label>
+        </div>
+      </div>
+
+      <div class="q1-row">
+        <div class="letter-pair">4. t — z</div>
+        <div class="radio-group">
+          <label class="radio-btn"><input type="radio" name="q1_4" value="3"> 3</label>
+          <label class="radio-btn"><input type="radio" name="q1_4" value="5"> 5</label>
+          <label class="radio-btn"><input type="radio" name="q1_4" value="1"> 1</label>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUESTION 2 -->
+    <section class="card">
+      <div class="q-header">
+        <h2>QUESTION 2 – In which of the sequences below do the letters appear in the correct order? Tick in the box.</h2>
+        <span class="score-pill">4 Marks</span>
+      </div>
+      <div class="seq-grid">
+        <label class="seq-box"><span>5. a d b c e g f h</span><input type="checkbox" id="q2_5" style="transform:scale(1.4);"></label>
+        <label class="seq-box"><span>6. h i j k l m n o</span><input type="checkbox" id="q2_6" style="transform:scale(1.4);"></label>
+        <label class="seq-box"><span>7. o p q r s t u v</span><input type="checkbox" id="q2_7" style="transform:scale(1.4);"></label>
+        <label class="seq-box"><span>8. g l m c a t x m</span><input type="checkbox" id="q2_8" style="transform:scale(1.4);"></label>
+      </div>
+    </section>
+
+    <!-- PART 2 -->
+    <div class="part-banner">Part 2: Phonics (Examiner Oral Evaluation)</div>
+
+    <!-- QUESTION 3 -->
+    <section class="card">
+      <div class="q-header">
+        <h2>QUESTION 3: Say the sounds of the letters.</h2>
+        <span class="score-pill">26 Marks</span>
+      </div>
+      <div class="examiner-note">Examiner points at each letter and the student says its sound (1 mark each).</div>
+      <div class="chip-grid">
+        <span class="chip">f</span><span class="chip">o</span><span class="chip">i</span><span class="chip">r</span><span class="chip">a</span>
+        <span class="chip">x</span><span class="chip">t</span><span class="chip">h</span><span class="chip">m</span><span class="chip">c</span>
+        <span class="chip">d</span><span class="chip">u</span><span class="chip">l</span><span class="chip">s</span><span class="chip">k</span>
+        <span class="chip">v</span><span class="chip">y</span><span class="chip">e</span><span class="chip">z</span><span class="chip">p</span>
+        <span class="chip">g</span><span class="chip">w</span><span class="chip">qu</span><span class="chip">b</span><span class="chip">n</span><span class="chip">j</span>
+      </div>
+      <div class="examiner-score-bar">
+        <span><strong>Examiner Score Entry (Q3):</strong></span>
+        <div><input type="number" id="score_q3" min="0" max="26" value="0" /> / 26</div>
+      </div>
+    </section>
+
+    <!-- QUESTION 4 -->
+    <section class="card">
+      <div class="q-header">
+        <h2>QUESTION 4: Read the syllables. (CV, VC)</h2>
+        <span class="score-pill">26 Marks</span>
+      </div>
+      <div class="examiner-note">Examiner points at each syllable and the student says its sound (1 mark each).</div>
+      <div class="chip-grid">
+        <span class="chip">an</span><span class="chip">le</span><span class="chip">ho</span><span class="chip">ri</span><span class="chip">bu</span>
+        <span class="chip">at</span><span class="chip">no</span><span class="chip">im</span><span class="chip">up</span><span class="chip">eg</span>
+        <span class="chip">ja</span><span class="chip">ox</span><span class="chip">du</span><span class="chip">we</span><span class="chip">gi</span>
+        <span class="chip">yo</span><span class="chip">if</span><span class="chip">ve</span><span class="chip">pa</span><span class="chip">cu</span>
+        <span class="chip">mo</span><span class="chip">qui</span><span class="chip">za</span><span class="chip">on</span><span class="chip">as</span><span class="chip">ki</span>
+      </div>
+      <div class="examiner-score-bar">
+        <span><strong>Examiner Score Entry (Q4):</strong></span>
+        <div><input type="number" id="score_q4" min="0" max="26" value="0" /> / 26</div>
+      </div>
+    </section>
+
+    <!-- QUESTION 5 -->
+    <section class="card">
+      <div class="q-header">
+        <h2>QUESTION 5: Read the CVC words.</h2>
+        <span class="score-pill">26 Marks</span>
+      </div>
+      <div class="examiner-note">Examiner listens as the student reads the CVC words (1 mark each).</div>
+      <div class="chip-grid">
+        <span class="chip">can</span><span class="chip">let</span><span class="chip">hop</span><span class="chip">ram</span><span class="chip">but</span>
+        <span class="chip">cap</span><span class="chip">not</span><span class="chip">man</span><span class="chip">cup</span><span class="chip">leg</span>
+        <span class="chip">jam</span><span class="chip">fox</span><span class="chip">dog</span><span class="chip">wet</span><span class="chip">bag</span>
+        <span class="chip">fan</span><span class="chip">ten</span><span class="chip">vet</span><span class="chip">pan</span><span class="chip">cut</span>
+        <span class="chip">mop</span><span class="chip">six</span><span class="chip">zap</span><span class="chip">son</span><span class="chip">gas</span><span class="chip">kid</span>
+      </div>
+      <div class="examiner-score-bar">
+        <span><strong>Examiner Score Entry (Q5):</strong></span>
+        <div><input type="number" id="score_q5" min="0" max="26" value="0" /> / 26</div>
+      </div>
+    </section>
+
+    <!-- PART 3 -->
+    <div class="part-banner">Part 3: Vocabulary & Reading Comprehension</div>
+
+    <!-- QUESTION 6 -->
+    <section class="card">
+      <div class="q-header">
+        <h2>QUESTION 6: Match the words with the pictures.</h2>
+        <span class="score-pill">4 Marks</span>
+      </div>
+      <p style="font-size:0.85rem;color:#4b5563;margin-top:0;">Example: 🐕 Dog → <strong>a dog</strong></p>
+      <div class="match-grid">
+        <div class="match-item">
+          <span class="match-emoji">🐝</span>
+          <select id="q6_bee">
+            <option value="">-- Select --</option>
+            <option value="an ant">an ant</option>
+            <option value="a cat">a cat</option>
+            <option value="a fish">a fish</option>
+            <option value="a bee">a bee</option>
+          </select>
+        </div>
+        <div class="match-item">
+          <span class="match-emoji">🐜</span>
+          <select id="q6_ant">
+            <option value="">-- Select --</option>
+            <option value="an ant">an ant</option>
+            <option value="a cat">a cat</option>
+            <option value="a fish">a fish</option>
+            <option value="a bee">a bee</option>
+          </select>
+        </div>
+        <div class="match-item">
+          <span class="match-emoji">🐈</span>
+          <select id="q6_cat">
+            <option value="">-- Select --</option>
+            <option value="an ant">an ant</option>
+            <option value="a cat">a cat</option>
+            <option value="a fish">a fish</option>
+            <option value="a bee">a bee</option>
+          </select>
+        </div>
+        <div class="match-item">
+          <span class="match-emoji">🐠</span>
+          <select id="q6_fish">
+            <option value="">-- Select --</option>
+            <option value="an ant">an ant</option>
+            <option value="a cat">a cat</option>
+            <option value="a fish">a fish</option>
+            <option value="a bee">a bee</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUESTION 7 -->
+    <section class="card">
+      <div class="q-header">
+        <h2>QUESTION 7: Read & Answer Comprehension Questions</h2>
+        <span class="score-pill">23 Marks (18 Read + 5 Q&A)</span>
+      </div>
+
+      <div class="passages">
+        <div class="passage-card">
+          <h4>🎒 My bag</h4>
+          <p>My bag is big.<br>My bag is red.<br>I have a big red bag.</p>
+        </div>
+        <div class="passage-card">
+          <h4>🐠 On my desk</h4>
+          <p>I have a small bowl.<br>I have a pet fish.<br>My pet fish is in my bowl.<br>My bowl is on my desk.</p>
+        </div>
+      </div>
+
+      <div class="examiner-score-bar" style="margin-bottom:14px;">
+        <span><strong>Examiner Oral Pronunciation Score (Q7 Reading):</strong></span>
+        <div><input type="number" id="score_q7_read" min="0" max="18" value="0" /> / 18</div>
+      </div>
+
+      <p style="font-weight:700;margin-bottom:8px;">Now answer the questions. Select “YES” or “NO” (5 Marks):</p>
+      <div class="q1-row">
+        <span>1. My bag is big.</span>
+        <div class="radio-group">
+          <label class="radio-btn"><input type="radio" name="q7_1" value="YES"> YES</label>
+          <label class="radio-btn"><input type="radio" name="q7_1" value="NO"> NO</label>
+        </div>
+      </div>
+      <div class="q1-row">
+        <span>2. My bag is pink.</span>
+        <div class="radio-group">
+          <label class="radio-btn"><input type="radio" name="q7_2" value="YES"> YES</label>
+          <label class="radio-btn"><input type="radio" name="q7_2" value="NO"> NO</label>
+        </div>
+      </div>
+      <div class="q1-row">
+        <span>3. My bowl is small.</span>
+        <div class="radio-group">
+          <label class="radio-btn"><input type="radio" name="q7_3" value="YES"> YES</label>
+          <label class="radio-btn"><input type="radio" name="q7_3" value="NO"> NO</label>
+        </div>
+      </div>
+      <div class="q1-row">
+        <span>4. The fish is on the desk.</span>
+        <div class="radio-group">
+          <label class="radio-btn"><input type="radio" name="q7_4" value="YES"> YES</label>
+          <label class="radio-btn"><input type="radio" name="q7_4" value="NO"> NO</label>
+        </div>
+      </div>
+      <div class="q1-row">
+        <span>5. The book is in the bowl.</span>
+        <div class="radio-group">
+          <label class="radio-btn"><input type="radio" name="q7_5" value="YES"> YES</label>
+          <label class="radio-btn"><input type="radio" name="q7_5" value="NO"> NO</label>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUESTION 8 -->
+    <section class="card">
+      <div class="q-header">
+        <h2>QUESTION 8: LISTEN AND WRITE</h2>
+        <span class="score-pill">20 Marks</span>
+      </div>
+      <p style="font-size:0.85rem;color:#4b5563;margin-top:0;">Listen to the letter sounds dictated by the examiner and write them in the blanks (1–20).</p>
+      <div class="dict-grid" id="dictGrid"></div>
+      <div class="examiner-score-bar">
+        <span><strong>Examiner Dictation Score (Q8):</strong></span>
+        <div><input type="number" id="score_q8" min="0" max="20" value="0" /> / 20</div>
+      </div>
+    </section>
+
+    <!-- PART 4 -->
+    <div class="part-banner">Part 4: Translation and Dictation</div>
+
+    <!-- QUESTION 9 -->
+    <section class="card">
+      <div class="q-header">
+        <h2>QUESTION 9: Translate into Arabic. Write in the spaces provided.</h2>
+        <span class="score-pill">12 Marks</span>
+      </div>
+      <p style="font-size:0.85rem;color:#4b5563;margin-top:0;">Example: 0. Honey → <strong>عسل</strong></p>
+      <div class="trans-grid" id="q9Grid"></div>
+    </section>
+
+    <!-- QUESTION 10 -->
+    <section class="card">
+      <div class="q-header">
+        <h2>QUESTION 10: Translate into English. Write in the spaces provided.</h2>
+        <span class="score-pill">12 Marks</span>
+      </div>
+      <p style="font-size:0.85rem;color:#4b5563;margin-top:0;">Example: 0. عسل → <strong>honey</strong></p>
+      <div class="trans-grid" id="q10Grid"></div>
+    </section>
+
+    <button type="button" class="btn btn-primary" onclick="confirmSubmit()">Submit Final Exam</button>
+  </main>
+
+  <!-- RESULT & EXAMINER SHARE SCREEN -->
+  <section id="resultContainer" class="container hidden">
+    <div class="card" style="border-top:5px solid var(--success);">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+        <div>
+          <h2 style="margin:0;color:var(--success);">✅ Examination Submitted</h2>
+          <p style="margin:4px 0 0;font-size:0.85rem;color:#4b5563;">Official Digital Record • Signed: <strong>BEM -SAR-B.LONG PHONICS</strong></p>
+        </div>
+        <div style="background:#dcfce7;color:#166534;padding:10px 16px;border-radius:8px;text-align:center;">
+          <span style="display:block;font-size:0.75rem;font-weight:700;">TOTAL SCORE</span>
+          <strong id="finalTotalBadge" style="font-size:1.5rem;">0 / 165</strong>
+        </div>
+      </div>
+
+      <div id="candidateSummaryBox" style="margin-top:14px;padding:10px;background:#f9fafb;border-radius:6px;font-size:0.9rem;"></div>
+
+      <table class="result-table">
+        <thead>
+          <tr>
+            <th>Question / Section</th>
+            <th>Candidate Mark</th>
+            <th>Max Mark</th>
+          </tr>
+        </thead>
+        <tbody id="resultBreakdownBody"></tbody>
+      </table>
+
+      <!-- Examiner Post-Submission Score Adjustment -->
+      <div style="background:#fffbeb;border:1px solid #fcd34d;padding:12px;border-radius:8px;margin-top:14px;">
+        <strong style="font-size:0.9rem;color:#92400e;">Examiner Oral/Dictation Mark Verification:</strong>
+        <p style="font-size:0.8rem;margin:4px 0 8px;color:#78350f;">If oral/dictation marks (Q3, Q4, Q5, Q7-Read, Q8) were not entered before submission, the examiner can update them below (PIN: <code>1234</code>):</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <input type="password" id="examinerPin" placeholder="Examiner PIN" style="padding:6px 10px;border:1px solid #d1d5db;border-radius:6px;width:130px;" autocomplete="off" />
+          <button type="button" class="btn" style="background:#d97706;color:#fff;padding:6px 14px;font-size:0.85rem;" onclick="unlockExaminerEdit()">Update Oral Marks</button>
+        </div>
+        <div id="postExaminerInputs" class="hidden" style="margin-top:10px;display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;">
+          <div><label style="font-size:0.75rem;font-weight:700;">Q3 (Max 26)</label><input type="number" id="post_q3" min="0" max="26" style="width:100%;padding:4px;" onchange="recalculateFromPost()"></div>
+          <div><label style="font-size:0.75rem;font-weight:700;">Q4 (Max 26)</label><input type="number" id="post_q4" min="0" max="26" style="width:100%;padding:4px;" onchange="recalculateFromPost()"></div>
+          <div><label style="font-size:0.75rem;font-weight:700;">Q5 (Max 26)</label><input type="number" id="post_q5" min="0" max="26" style="width:100%;padding:4px;" onchange="recalculateFromPost()"></div>
+          <div><label style="font-size:0.75rem;font-weight:700;">Q7 Read (Max 18)</label><input type="number" id="post_q7r" min="0" max="18" style="width:100%;padding:4px;" onchange="recalculateFromPost()"></div>
+          <div><label style="font-size:0.75rem;font-weight:700;">Q8 Dict (Max 20)</label><input type="number" id="post_q8" min="0" max="20" style="width:100%;padding:4px;" onchange="recalculateFromPost()"></div>
+        </div>
+      </div>
+
+      <h3 style="margin:18px 0 8px;font-size:1rem;">Share Marks with Examiner:</h3>
+      <div class="share-actions">
+        <button type="button" class="btn btn-whatsapp" onclick="shareWhatsApp()">Share via WhatsApp</button>
+        <button type="button" class="btn btn-email" onclick="shareEmail()">Share via Email</button>
+        <button type="button" class="btn btn-copy" onclick="copyReport()">Copy Result Report</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const EXAM_SIGNATURE = "BEM -SAR-B.LONG PHONICS";
+    const STORAGE_KEY = "blong_phonics_exam_state_v1";
+    const TOTAL_SECONDS = 75 * 60; // 75 minutes
+
+    let timeLeft = TOTAL_SECONDS;
+    let timerInterval = null;
+    let examStarted = false;
+    let examSubmitted = false;
+    let violations = 0;
+    let latestReportText = "";
+    let computedScores = {};
+
+    // Question 9 Data (English -> Arabic)
+    const q9Items = [
+      { id: 1, en: "a pen", ans: ["قلم", "قلم حبر", "قلم جاف"] },
+      { id: 2, en: "a book", ans: ["كتاب"] },
+      { id: 3, en: "a bed", ans: ["سرير"] },
+      { id: 4, en: "wings", ans: ["أجنحة", "اجنحة", "أجنحه", "اجنحه"] },
+      { id: 5, en: "children", ans: ["أطفال", "اطفال"] },
+      { id: 6, en: "a bag", ans: ["حقيبة", "حقيبه", "شنطة", "شنطه"] },
+      { id: 7, en: "small", ans: ["صغير", "صغيرة", "صغيره"] },
+      { id: 8, en: "big", ans: ["كبير", "كبيرة", "كبيره"] },
+      { id: 9, en: "six", ans: ["ستة", "سته", "٦", "6"] },
+      { id: 10, en: "red", ans: ["أحمر", "احمر", "حمراء"] },
+      { id: 11, en: "fat", ans: ["سمين", "بدين", "سمينة"] },
+      { id: 12, en: "glad", ans: ["سعيد", "مسرور", "فرحان"] }
+    ];
+
+    // Question 10 Data (Arabic -> English)
+    const q10Items = [
+      { id: 13, ar: "ماء", ans: ["water"] },
+      { id: 14, ar: "لكن", ans: ["but"] },
+      { id: 15, ar: "اثنان", ans: ["two", "2"] },
+      { id: 16, ar: "أليف", ans: ["pet", "a pet"] },
+      { id: 17, ar: "أنا", ans: ["i"] },
+      { id: 18, ar: "هو", ans: ["he"] },
+      { id: 19, ar: "على", ans: ["on"] },
+      { id: 20, ar: "في", ans: ["in"] },
+      { id: 21, ar: "نعم", ans: ["yes"] },
+      { id: 22, ar: "يجري", ans: ["run", "runs", "running"] },
+      { id: 23, ar: "يستطيع", ans: ["can"] },
+      { id: 24, ar: "لا", ans: ["no"] }
+    ];
+
+    // Build Dynamic Inputs on Load
+    function initForms() {
+      const dictGrid = document.getElementById("dictGrid");
+      for (let i = 1; i <= 20; i++) {
+        dictGrid.innerHTML += `
+          <div class="dict-cell">
+            <span>#${i}</span>
+            <input type="text" id="dict_${i}" maxlength="3" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+          </div>`;
+      }
+
+      const q9Grid = document.getElementById("q9Grid");
+      q9Items.forEach(item => {
+        q9Grid.innerHTML += `
+          <div class="trans-row">
+            <span class="trans-word">${item.id}. ${item.en}</span>
+            <input type="text" id="q9_${item.id}" dir="rtl" placeholder="اكتب بالعربية" autocomplete="off" autocorrect="off" spellcheck="false" />
+          </div>`;
+      });
+
+      const q10Grid = document.getElementById("q10Grid");
+      q10Items.forEach(item => {
+        q10Grid.innerHTML += `
+          <div class="trans-row">
+            <span class="trans-word">${item.id}. ${item.ar}</span>
+            <input type="text" id="q10_${item.id}" placeholder="Write in English" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+          </div>`;
+      });
+
+      // Check anti-refresh lock state
+      const savedState = localStorage.getItem(STORAGE_KEY);
+      if (savedState) {
+        const parsed = JSON.parse(savedState);
+        if (parsed.status === "LOCKED_OR_SUBMITTED") {
+          document.getElementById("startOverlay").classList.add("hidden");
+          if (parsed.scores) {
+            computedScores = parsed.scores;
+            renderResults(parsed.studentInfo, parsed.scores, true);
+          } else {
+            alert("Session locked: Examination page was refreshed or closed. Auto-submitting current state.");
+            submitExam(true);
+          }
+        }
+      }
+    }
+
+    function startExam() {
+      examStarted = true;
+      document.getElementById("startOverlay").classList.add("hidden");
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ status: "IN_PROGRESS", startedAt: Date.now() }));
+      startTimer();
+    }
+
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        if (examSubmitted) return;
+        timeLeft--;
+        const mins = Math.floor(timeLeft / 60);
+        const secs = timeLeft % 60;
+        document.getElementById("timerDisplay").textContent =
+          `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          alert("Time is up (75 minutes)! Your exam is being submitted automatically.");
+          submitExam(true);
+        }
+      }, 1000);
+    }
+
+    // Anti-Refresh & App-Switch Protection (Disables mobile dictionary/translator switching)
+    window.addEventListener("beforeunload", function (e) {
+      if (examStarted && !examSubmitted) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ status: "LOCKED_OR_SUBMITTED" }));
+        e.preventDefault();
+        e.returnValue = "Refreshing or leaving will permanently lock and submit your exam!";
+      }
+    });
+
+    document.addEventListener("visibilitychange", function () {
+      if (examStarted && !examSubmitted && document.hidden) {
+        violations++;
+        document.getElementById("violationCount").textContent = violations;
+        alert("⚠️ WARNING: Leaving the exam screen or opening mobile dictionary/translation apps is prohibited! Violation #" + violations + " recorded.");
+      }
+    });
+
+    // Disable copy/paste/cut shortcuts
+    document.addEventListener("copy", e => e.preventDefault());
+    document.addEventListener("paste", e => e.preventDefault());
+    document.addEventListener("cut", e => e.preventDefault());
+
+    function normalizeText(str) {
+      return (str || "")
+        .trim()
+        .toLowerCase()
+        .replace(/[.,!?'"ـًٌٍَُِّْ]/g, "")
+        .replace(/\s+/g, " ");
+    }
+
+    function confirmSubmit() {
+      const name = document.getElementById("studentName").value.trim();
+      if (!name) {
+        alert("Please enter the Participant's Name before submitting.");
+        document.getElementById("studentName").focus();
+        return;
+      }
+      if (confirm("Are you sure you want to submit your final exam? You cannot change answers after submission.")) {
+        submitExam(false);
+      }
+    }
+
+    function submitExam(autoForced) {
+      if (examSubmitted) return;
+      examSubmitted = true;
+      clearInterval(timerInterval);
+
+      // Grade Q1 (8 marks: 2 marks each for 4 items)
+      let q1Score = 0;
+      const q1_1 = document.querySelector('input[name="q1_1"]:checked')?.value;
+      const q1_2 = document.querySelector('input[name="q1_2"]:checked')?.value;
+      const q1_3 = document.querySelector('input[name="q1_3"]:checked')?.value;
+      const q1_4 = document.querySelector('input[name="q1_4"]:checked')?.value;
+      if (q1_1 === "3") q1Score += 2; // d, e, f
+      if (q1_2 === "1") q1Score += 2; // m
+      if (q1_3 === "5") q1Score += 2; // l, m, n, o, p
+      if (q1_4 === "5") q1Score += 2; // u, v, w, x, y
+
+      // Grade Q2 (4 marks: 2 marks each for correct sequences 6 & 7)
+      let q2Score = 0;
+      const c5 = document.getElementById("q2_5").checked;
+      const c6 = document.getElementById("q2_6").checked;
+      const c7 = document.getElementById("q2_7").checked;
+      const c8 = document.getElementById("q2_8").checked;
+      if (!c5 && !c8) {
+        if (c6) q2Score += 2;
+        if (c7) q2Score += 2;
+      }
+
+      // Oral/Dictation scores entered by Examiner
+      const q3Score = Math.min(26, Math.max(0, Number(document.getElementById("score_q3").value) || 0));
+      const q4Score = Math.min(26, Math.max(0, Number(document.getElementById("score_q4").value) || 0));
+      const q5Score = Math.min(26, Math.max(0, Number(document.getElementById("score_q5").value) || 0));
+
+      // Grade Q6 (4 marks: 1 mark each)
+      let q6Score = 0;
+      if (document.getElementById("q6_bee").value === "a bee") q6Score += 1;
+      if (document.getElementById("q6_ant").value === "an ant") q6Score += 1;
+      if (document.getElementById("q6_cat").value === "a cat") q6Score += 1;
+      if (document.getElementById("q6_fish").value === "a fish") q6Score += 1;
+
+      // Grade Q7 (18 oral reading + 5 comprehension = 23 marks)
+      const q7ReadScore = Math.min(18, Math.max(0, Number(document.getElementById("score_q7_read").value) || 0));
+      let q7CompScore = 0;
+      if (document.querySelector('input[name="q7_1"]:checked')?.value === "YES") q7CompScore += 1;
+      if (document.querySelector('input[name="q7_2"]:checked')?.value === "NO") q7CompScore += 1;
+      if (document.querySelector('input[name="q7_3"]:checked')?.value === "YES") q7CompScore += 1;
+      if (document.querySelector('input[name="q7_4"]:checked')?.value === "NO") q7CompScore += 1;
+      if (document.querySelector('input[name="q7_5"]:checked')?.value === "NO") q7CompScore += 1;
+
+      // Q8 Dictation (20 marks)
+      const q8Score = Math.min(20, Math.max(0, Number(document.getElementById("score_q8").value) || 0));
+
+      // Grade Q9 (12 marks: 1 mark each)
+      let q9Score = 0;
+      q9Items.forEach(item => {
+        const val = normalizeText(document.getElementById(`q9_${item.id}`).value);
+        if (item.ans.some(a => normalizeText(a) === val)) q9Score += 1;
+      });
+
+      // Grade Q10 (12 marks: 1 mark each)
+      let q10Score = 0;
+      q10Items.forEach(item => {
+        const val = normalizeText(document.getElementById(`q10_${item.id}`).value);
+        if (item.ans.some(a => normalizeText(a) === val)) q10Score += 1;
+      });
+
+      computedScores = {
+        q1: q1Score,
+        q2: q2Score,
+        q3: q3Score,
+        q4: q4Score,
+        q5: q5Score,
+        q6: q6Score,
+        q7_read: q7ReadScore,
+        q7_comp: q7CompScore,
+        q8: q8Score,
+        q9: q9Score,
+        q10: q10Score
+      };
+
+      const studentInfo = {
+        name: document.getElementById("studentName").value.trim() || "Unknown Candidate",
+        school: document.getElementById("schoolName").value.trim() || "-",
+        city: document.getElementById("cityAddress").value.trim() || "-",
+        date: document.getElementById("examDate").value.trim() || "2026",
+        violations: violations
+      };
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        status: "LOCKED_OR_SUBMITTED",
+        studentInfo,
+        scores: computedScores
+      }));
+
+      renderResults(studentInfo, computedScores, false);
+    }
+
+    function renderResults(info, s, fromReload) {
+      document.getElementById("examContainer").classList.add("hidden");
+      document.getElementById("resultContainer").classList.remove("hidden");
+
+      const total = s.q1 + s.q2 + s.q3 + s.q4 + s.q5 + s.q6 + s.q7_read + s.q7_comp + s.q8 + s.q9 + s.q10;
+      document.getElementById("finalTotalBadge").textContent = `${total} / 165`;
+
+      document.getElementById("candidateSummaryBox").innerHTML = `
+        <strong>Candidate:</strong> ${info.name} &nbsp;|&nbsp;
+        <strong>School:</strong> ${info.school} &nbsp;|&nbsp;
+        <strong>Date:</strong> ${info.date}<br>
+        <strong>Signature:</strong> <code>${EXAM_SIGNATURE}</code> &nbsp;|&nbsp;
+        <strong>App-Switch Warnings:</strong> ${info.violations}
+      `;
+
+      const rows = [
+        ["Question 1: Alphabet Spacing", s.q1, 8],
+        ["Question 2: Alphabet Sequences", s.q2, 4],
+        ["Question 3: Letter Sounds (Oral)", s.q3, 26],
+        ["Question 4: Syllables CV/VC (Oral)", s.q4, 26],
+        ["Question 5: CVC Words (Oral)", s.q5, 26],
+        ["Question 6: Word-Picture Matching", s.q6, 4],
+        ["Question 7A: Reading Pronunciation", s.q7_read, 18],
+        ["Question 7B: Reading Comprehension", s.q7_comp, 5],
+        ["Question 8: Listen & Write (Dictation)", s.q8, 20],
+        ["Question 9: Translate to Arabic", s.q9, 12],
+        ["Question 10: Translate to English", s.q10, 12]
+      ];
+
+      const tbody = document.getElementById("resultBreakdownBody");
+      tbody.innerHTML = rows.map(r => `
+        <tr>
+          <td>${r[0]}</td>
+          <td><strong>${r[1]}</strong></td>
+          <td>${r[2]}</td>
+        </tr>
+      `).join("") + `
+        <tr style="background:#dcfce7;font-weight:700;">
+          <td>TOTAL EXAM MARK</td>
+          <td>${total}</td>
+          <td>165</td>
+        </tr>`;
+
+      // Sync post-examiner inputs
+      document.getElementById("post_q3").value = s.q3;
+      document.getElementById("post_q4").value = s.q4;
+      document.getElementById("post_q5").value = s.q5;
+      document.getElementById("post_q7r").value = s.q7_read;
+      document.getElementById("post_q8").value = s.q8;
+
+      // Build shareable report string
+      latestReportText =
+`SAR - SOUND AND READ
+B. LONG PHONICS - LEVEL 1 FINAL EXAM
+Signature: ${EXAM_SIGNATURE}
+----------------------------------
+Candidate: ${info.name}
+School: ${info.school}
+Date: ${info.date}
+Security Warnings: ${info.violations}
+----------------------------------
+INDIVIDUAL QUESTION MARKS:
+- Q1 (Alphabet Spacing): ${s.q1} / 8
+- Q2 (Alphabet Order): ${s.q2} / 4
+- Q3 (Letter Sounds): ${s.q3} / 26
+- Q4 (Syllables): ${s.q4} / 26
+- Q5 (CVC Words): ${s.q5} / 26
+- Q6 (Matching): ${s.q6} / 4
+- Q7A (Reading): ${s.q7_read} / 18
+- Q7B (Comprehension): ${s.q7_comp} / 5
+- Q8 (Dictation): ${s.q8} / 20
+- Q9 (Arabic Translation): ${s.q9} / 12
+- Q10 (English Translation): ${s.q10} / 12
+----------------------------------
+TOTAL MARK: ${total} / 165`;
+    }
+
+    function unlockExaminerEdit() {
+      const pin = document.getElementById("examinerPin").value;
+      if (pin === "1234") {
+        document.getElementById("postExaminerInputs").classList.remove("hidden");
+      } else {
+        alert("Invalid Examiner PIN.");
+      }
+    }
+
+    function recalculateFromPost() {
+      computedScores.q3 = Math.min(26, Math.max(0, Number(document.getElementById("post_q3").value) || 0));
+      computedScores.q4 = Math.min(26, Math.max(0, Number(document.getElementById("post_q4").value) || 0));
+      computedScores.q5 = Math.min(26, Math.max(0, Number(document.getElementById("post_q5").value) || 0));
+      computedScores.q7_read = Math.min(18, Math.max(0, Number(document.getElementById("post_q7r").value) || 0));
+      computedScores.q8 = Math.min(20, Math.max(0, Number(document.getElementById("post_q8").value) || 0));
+
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+      const info = saved.studentInfo || { name: "Candidate", school: "-", date: "2026", violations };
+      saved.scores = computedScores;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+      renderResults(info, computedScores, false);
+    }
+
+    function shareWhatsApp() {
+      const url = `https://wa.me/?text=${encodeURIComponent(latestReportText)}`;
+      window.open(url, "_blank");
+    }
+
+    function shareEmail() {
+      const subject = encodeURIComponent(`Exam Results - ${EXAM_SIGNATURE}`);
+      const body = encodeURIComponent(latestReportText);
+      window.location.href = `mailto:?subject=${subject}&body=${body}`;
+    }
+
+    function copyReport() {
+      navigator.clipboard.writeText(latestReportText).then(() => {
+        alert("Exam marks report copied! You can paste and send it to your examiner.");
+      });
+    }
+
+    window.onload = initForms;
+  </script>
+</body>
+</html>
